@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:doctor_appointment_app/Services/Sharedservices.dart';
+import 'package:doctor_appointment_app/model/login_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiBaseServices {
@@ -43,9 +45,11 @@ class ApiBaseServices {
     Map<String, String> conentType = {'Content-Type': 'application/json'};
     newHeaders.addAll(conentType);
     if (SharedServices.isLoggedIn()) {
-      newHeaders.addAll({'Authorization': SharedServices.getToken()});
+      LoginModel? model = SharedServices.getLoginDetails();
+      String token = model!.token.toString();
+      newHeaders.addAll({'Authorization': token});
     }
-    print("newheaders$newHeaders");
+    log("newheaders$newHeaders");
     final response = await http.get(
       url(extendedURL: endPoint),
       headers: newHeaders,
@@ -62,6 +66,49 @@ class ApiBaseServices {
       url(extendedURL: endPoint),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(body),
+    );
+    return response;
+  }
+
+//  post request with header//----------------------------------------------------------------------------
+  static Future<http.Response> postRequestWithHeader({
+    required String endPoint,
+    required Object body,
+  }) async {
+    Map<String, String> newHeaders = {};
+    Map<String, String> conentType = {'Content-Type': 'application/json'};
+    newHeaders.addAll(conentType);
+    if (SharedServices.isLoggedIn()) {
+      LoginModel? model = SharedServices.getLoginDetails();
+      String token = model!.token.toString();
+      newHeaders.addAll({'Authorization': token});
+    }
+    log("newheaders$newHeaders");
+    final response = await http.post(
+      url(extendedURL: endPoint),
+      headers: newHeaders,
+      body: jsonEncode(body),
+    );
+    return response;
+  }
+
+//post requst without body but with header--------------------------------------------
+  static Future<http.Response> postRequestWithoutBody({
+    required String endPoint,
+  }) async {
+    Map<String, String> newHeaders = {};
+    Map<String, String> conentType = {'Content-Type': 'application/json'};
+    newHeaders.addAll(conentType);
+    if (SharedServices.isLoggedIn()) {
+      LoginModel? model = SharedServices.getLoginDetails();
+      String token = model!.token.toString();
+      newHeaders.addAll({'Authorization': token});
+    }
+    log("newheaders$newHeaders");
+    final response = await http.post(
+      url(extendedURL: endPoint),
+      headers: newHeaders,
+      body: jsonEncode({}),
     );
     return response;
   }

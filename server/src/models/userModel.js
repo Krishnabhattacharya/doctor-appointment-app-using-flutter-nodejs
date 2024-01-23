@@ -23,10 +23,13 @@ const userScema=mongoose.Schema({
         type:String,
         required:true,
     },
-    role: {
-        type: String,
-        enum: ['user', 'doctor'],
-        default: 'user',
+    isAdmin:{
+        type:Boolean,
+        default:false
+    },
+    isDoctor:{
+        type:Boolean,
+        default:false
     },
     notifications:{
         type:Array,

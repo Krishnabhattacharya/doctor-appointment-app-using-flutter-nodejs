@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:doctor_appointment_app/Screens/dashbord_screen.dart';
 import 'package:doctor_appointment_app/Screens/register_screen.dart';
 import 'package:doctor_appointment_app/Services/ApiServices.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +38,17 @@ class _LoginScreen extends State<LoginScreen> {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                // Handle login logic here
                 String email = emailController.text;
                 String password = passwordController.text;
-                Apiservices.loginUser(email: email, password: password);
+                Apiservices.loginUser(email: email, password: password)
+                    .then((value) {
+                  if (value) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashBordScreen()));
+                  }
+                });
                 log('Email: $email, Password: $password');
                 // Add your login logic here
               },
@@ -49,7 +57,6 @@ class _LoginScreen extends State<LoginScreen> {
             const SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                // Navigate to the registration screen
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => RegisterScreen()),

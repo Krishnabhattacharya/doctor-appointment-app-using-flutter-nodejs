@@ -15,7 +15,7 @@ class _RegisterScreen extends State<RegisterScreen> {
   TextEditingController t1 = TextEditingController();
   TextEditingController t2 = TextEditingController();
   TextEditingController t3 = TextEditingController();
-  final List<String> _list = <String>["user", "doctor"];
+  final List<String> _list = <String>["user", "admin"];
   String _pet = 'user';
 
   @override

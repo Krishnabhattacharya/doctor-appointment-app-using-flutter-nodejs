@@ -41,7 +41,8 @@ class User {
   String? id;
   String? name;
   String? email;
-  String? role;
+  bool? isAdmin;
+  bool? isDoctor;
   List<dynamic>? notifications;
   List<dynamic>? seenNotifications;
   int? v;
@@ -50,7 +51,8 @@ class User {
     this.id,
     this.name,
     this.email,
-    this.role,
+    this.isAdmin,
+    this.isDoctor,
     this.notifications,
     this.seenNotifications,
     this.v,
@@ -60,7 +62,8 @@ class User {
         id: json["_id"],
         name: json["name"],
         email: json["email"],
-        role: json["role"],
+        isAdmin: json["isAdmin"],
+        isDoctor: json["isDoctor"],
         notifications: json["notifications"] == null
             ? []
             : List<dynamic>.from(json["notifications"]!.map((x) => x)),
@@ -74,7 +77,8 @@ class User {
         "_id": id,
         "name": name,
         "email": email,
-        "role": role,
+        "isAdmin": isAdmin,
+        "isDoctor": isDoctor,
         "notifications": notifications == null
             ? []
             : List<dynamic>.from(notifications!.map((x) => x)),

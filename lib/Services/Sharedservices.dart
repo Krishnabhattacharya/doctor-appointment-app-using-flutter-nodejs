@@ -16,16 +16,16 @@ import 'package:flutter/material.dart';
 //%%%%%%%%%%%%%%%%%%%%%$$$$$$$$$$$$$$$$$$########################
 
 class SharedServices {
-  //set// token//-------------------------------------------
-  static void setToken({required String token}) {
-    preferences!.setString("token", token);
-  }
+  // //set// token//-------------------------------------------
+  // static void setToken({required String token}) {
+  //   preferences!.setString("token", token);
+  // }
 
-  //get token==================================================
-  static String getToken() {
-    final String token = preferences!.getString('token') ?? '';
-    return token;
-  }
+  // //get token==================================================
+  // static String getToken() {
+  //   final String token = preferences!.getString('token') ?? '';
+  //   return token;
+  // }
 
 //set all the login details-----------------------------------
   static Future<void> setLoginDetails(LoginModel? usermodel) async {
@@ -45,7 +45,7 @@ class SharedServices {
 
 //for login check//----------------------------------------
   static bool isLoggedIn() {
-    return preferences!.getString("token") != null ? true : false;
+    return preferences!.getString("login_details") != null ? true : false;
   }
 
 //for logout//--------------------------------------------
